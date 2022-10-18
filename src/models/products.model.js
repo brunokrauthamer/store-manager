@@ -21,13 +21,8 @@ const insertProduct = async (product) => {
     `INSERT INTO StoreManager.products (${columns}) VALUE (${placeholders})`,
     [...Object.values(product)],
   );
-  console.log(response.insertId);
   return response.insertId;
 };
-
-insertProduct({
-  name: 'ProdutoX',
-});
 
 module.exports = {
   listProducts,
