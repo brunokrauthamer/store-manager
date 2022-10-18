@@ -1,56 +1,56 @@
-const chai = require('chai');
-const sinon = require('sinon');
-const sinonChai = require('sinon-chai');
+// const chai = require('chai');
+// const sinon = require('sinon');
+// const sinonChai = require('sinon-chai');
 
-const { expect } = chai;
-chai.use(sinonChai);
+// const { expect } = chai;
+// chai.use(sinonChai);
 
-const { productService } = require('../../../src/services');
-const productController = require('../../../src/controllers/product.controller');
-const { products } = require('./mocks/product.controller.mock');
+// const { productService } = require('../../../src/services');
+// const productController = require('../../../src/controllers/product.controller');
+// const { products } = require('./mocks/product.controller.mock');
 
-describe('Verifica a camada controller de product', () => {
-  afterEach(sinon.restore);
-  
-  it('Verifica a resposta quando é solicitada a lista completa', async () => {
-    const res = {};
-    const req = {};
+// describe('Verifica a camada controller de product', () => {
+//   afterEach(sinon.restore);
 
-    res.status = sinon.stub().returns(res);
-    res.json = sinon.stub().returns();
-    sinon.stub(productService, 'getAllProducts').resolves({ type: null, message: products });
+//   it('Verifica a resposta quando é solicitada a lista completa', async () => {
+//     const res = {};
+//     const req = {};
 
-    await productController.listAllProducts(req, res);
+//     res.status = sinon.stub().returns(res);
+//     res.json = sinon.stub().returns();
+//     sinon.stub(productService, 'getAllProducts').resolves({ type: null, message: products });
 
-    expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith(products);
-  });
+//     await productController.listAllProducts(req, res);
 
-  it('Verifica quando é feita uma busca por id existente', async () => {
-    const res = {};
-    const req = { params: { id: 1 } };
+//     expect(res.status).to.have.been.calledWith(200);
+//     expect(res.json).to.have.been.calledWith(products);
+//   });
 
-    res.status = sinon.stub().returns(res);
-    res.json = sinon.stub().returns();
-    sinon.stub(productService, 'getProductById').resolves({ type: null, message: products[0] });
+//   it('Verifica quando é feita uma busca por id existente', async () => {
+//     const res = {};
+//     const req = { params: { id: 1 } };
 
-    await productController.productById(req, res);
+//     res.status = sinon.stub().returns(res);
+//     res.json = sinon.stub().returns();
+//     sinon.stub(productService, 'getProductById').resolves({ type: null, message: products[0] });
+
+//     await productController.productById(req, res);
     
-    expect(res.status).to.have.been.calledWith(200);
-    expect(res.json).to.have.been.calledWith(products[0]);
-  });
+//     expect(res.status).to.have.been.calledWith(200);
+//     expect(res.json).to.have.been.calledWith(products[0]);
+//   });
 
-  it('Verifica quando é feita uma busca por id inexistente', async () => {
-    const res = {};
-    const req = { params: { id: 10 } };
+//   it('Verifica quando é feita uma busca por id inexistente', async () => {
+//     const res = {};
+//     const req = { params: { id: 10 } };
 
-    res.status = sinon.stub().returns(res);
-    res.json = sinon.stub().returns();
-    sinon.stub(productService, 'getProductById').resolves({ type: 'PRODUCT_NOT_FOUND', message: { message: 'Product not found' } });
+//     res.status = sinon.stub().returns(res);
+//     res.json = sinon.stub().returns();
+//     sinon.stub(productService, 'getProductById').resolves({ type: 'PRODUCT_NOT_FOUND', message: { message: 'Product not found' } });
 
-    await productController.productById(req, res);
+//     await productController.productById(req, res);
 
-    expect(res.status).to.have.been.calledWith(404);
-    expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
-  })
-});
+//     expect(res.status).to.have.been.calledWith(404);
+//     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
+//   })
+// });

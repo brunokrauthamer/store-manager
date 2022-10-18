@@ -12,9 +12,4 @@ describe('Testes de unidade do model de prodtos', () => {
     const result = await productsModel.listProducts();
     expect(result).to.be.deep.equal(products);
   });
-  // it('Verifica se connection é chamado'), async () => {
-  //   sinon.stub(connection, 'execute').resolves([products]);
-  //   await productsModel.listProducts();
-  //   expect(connection).to.have.been.called();
-  // }
 });
