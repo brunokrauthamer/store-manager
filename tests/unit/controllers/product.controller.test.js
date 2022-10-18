@@ -52,5 +52,30 @@ describe('Verifica a camada controller de product', () => {
 
     expect(res.status).to.have.been.calledWith(404);
     expect(res.json).to.have.been.calledWith({ message: 'Product not found' });
-  })
+  });
+  it('Verifica se insere um novo produto corretamente', async () => {
+    const res = {};
+    const req = { body: { name: 'Nome Grande' } };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(productService, 'insertProduct').resolves({ type: null, message: req.body });
+
+    await productController.insertNewProduct(req, res);
+
+    expect(res.status).to.have.been.calledWith(201);
+  });
+
+  it('Verifica se não insere um novo produto inadequado', async () => {
+    const res = {};
+    const req = { body: { name: 'Nome' } };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    sinon.stub(productService, 'insertProduct').resolves({ type: 422, message: '"Name" deve ser maior que 5' });
+
+    await productController.insertNewProduct(req, res);
+
+    expect(res.status).not.to.have.been.calledWith(201);
+  });
 });
