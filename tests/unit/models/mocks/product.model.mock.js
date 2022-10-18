@@ -9,12 +9,24 @@ const products = [
   }
 ]
 
+const returnArrayInsert = [
+ {
+    fieldCount: 0,
+    affectedRows: 1,
+    insertId: 5,
+    info: '',
+    serverStatus: 2,
+    warningStatus: 0
+  },
+  undefined
+]
+
 const oneProduct = {
-  "id": 2,
-  "name": "Traje de encolhimento"
+  name: 'Produto de teste',
 }
 
 module.exports = {
   products,
   oneProduct,
+  returnArrayInsert,
 };

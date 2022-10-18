@@ -17,10 +17,12 @@ const insertProduct = async (product) => {
     .map((_key) => '?')
     .join(', ');
 
-  const [response] = await connection.execute(
+  const response1 = await connection.execute(
     `INSERT INTO StoreManager.products (${columns}) VALUE (${placeholders})`,
     [...Object.values(product)],
   );
+  const [response] = response1;
+  console.log(typeof response);
   return response.insertId;
 };
 
