@@ -33,7 +33,6 @@ const validateProductIdValue = async (sale) => {
   const productsIds = productsList.map((product) => product.id);
   const productIdsInsert = sale.map((product) => product.productId);
   const verified = productIdsInsert.reduce((acc, id) => acc && productsIds.includes(id), true);
-  console.log('lista de produtos cadastrados', productsIds, 'lista de produtos a serem inseridos', productIdsInsert, 'verified', verified);
   return verified;
 };
 
