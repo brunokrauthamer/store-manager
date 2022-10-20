@@ -18,6 +18,22 @@ const insertNewSale = async (sale) => {
   };
 };
 
+const getAllSales = async () => {
+  const allSales = await salesModel.getAllSales();
+  return { type: 200, message: allSales };
+};
+
+const getSaleById = async (id) => {
+  const { type } = validations.validateSearchedSaleId(id);
+  if (type) return validations.validateSearchedSaleId(id);
+  const sale = await salesModel.getSaleById(id);
+  console.log({ type, message: sale });
+  return { type, message: sale };
+};
+
+getSaleById(91);
+
 module.exports = {
   insertNewSale,
+  getAllSales,
 };

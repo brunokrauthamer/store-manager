@@ -1,6 +1,6 @@
 const models = require('../models');
 
-const { productsModel } = models;
+const { productsModel, salesModel } = models;
 
 const validateNewProduct = ({ name }) => {
   if (!name) return { type: 400, message: '"name" is required' };
@@ -59,7 +59,20 @@ const validateNewSale = async (sale) => {
   return { type: null };
 };
 
+const validateSearchedSaleId = async (id) => {
+  const ids = await salesModel.getAllSalesIds();
+  // console.log(ids.includes(id));
+  const validId = ids.includes(id);
+  if (validId) {
+    return { type: null };
+  }
+  return {
+    type: 404, message: { message: 'Sale not found' },
+  };
+};
+
 module.exports = {
   validateNewProduct,
   validateNewSale,
+  validateSearchedSaleId,
 };
