@@ -33,17 +33,6 @@ const registerSale = async (sale) => {
 // pertinentes no banco de dados (duas tabelas) e ainda por cima retorna
 // o id da venda
 
-registerSale([
-  {
-    productId: 1,
-    quantity: 1,
-  },
-  {
-    productId: 2,
-    quantity: 5,
-  },
-]);
-
 module.exports = {
   registerSale,
 };

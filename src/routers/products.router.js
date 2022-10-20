@@ -1,12 +1,12 @@
 const express = require('express');
-const driverController = require('../controllers/product.controller');
+const productController = require('../controllers/product.controller');
 
 const router = express.Router();
 
-router.get('/', driverController.listAllProducts);
+router.get('/', productController.listAllProducts);
 
-router.get('/:id', driverController.productById);
+router.get('/:id', productController.productById);
 
-router.post('/', driverController.insertNewProduct);
+router.post('/', productController.insertNewProduct);
 
 module.exports = router;
