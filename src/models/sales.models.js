@@ -63,7 +63,7 @@ const getSaleById = async (id) => {
     WHERE ${idCondition}
     ORDER BY ${order}`,
   );
-  console.log(JSON.parse(JSON.stringify(sale)));
+  // console.log(JSON.parse(JSON.stringify(sale)));
   return JSON.parse(JSON.stringify(sale));
 };
 

@@ -1,3 +1,4 @@
+const camelize = require('camelize');
 const models = require('../models');
 const validations = require('./validationsInputValue');
 
@@ -19,21 +20,22 @@ const insertNewSale = async (sale) => {
 };
 
 const getAllSales = async () => {
-  const allSales = await salesModel.getAllSales();
+  const allSales = camelize(await salesModel.getAllSales());
   return { type: 200, message: allSales };
 };
 
 const getSaleById = async (id) => {
-  const { type } = validations.validateSearchedSaleId(id);
-  if (type) return validations.validateSearchedSaleId(id);
-  const sale = await salesModel.getSaleById(id);
-  console.log({ type, message: sale });
-  return { type, message: sale };
+  const response = await validations.validateSearchedSaleId(id);
+  const { type } = response;
+  // console.log(response, type);
+  if (type) return response;
+  const sale = camelize(await salesModel.getSaleById(id));
+  // console.log({ type: 200, message: sale });
+  return { type: 200, message: sale };
 };
-
-getSaleById(91);
 
 module.exports = {
   insertNewSale,
   getAllSales,
+  getSaleById,
 };
