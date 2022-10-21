@@ -2,7 +2,7 @@ const models = require('../models');
 const validations = require('./validationsInputValue');
 
 const { productsModel } = models;
-const { validateNewProduct } = validations;
+const { validateNewProduct, validateSearchedSaleId } = validations;
 
 const getProductById = async (id) => {
   const allProducts = await productsModel.listProducts();
@@ -27,8 +27,28 @@ const insertProduct = async (product) => {
   return { type: null, message: { id, name: product.name } };
 };
 
+const updateProductById = async (id, nameObj) => {
+  const nameResponse = await validateNewProduct(nameObj);
+  // console.log(nameResponse);
+  const nameType = nameResponse.type;
+  const nameMessage = nameResponse.message;
+  // console.log(nameType);
+  if (nameType) return { type: nameType, message: { message: nameMessage } };
+  const idResponse = await validateSearchedSaleId(id, 'Product');
+  const idType = idResponse.type;
+  // console.log(response);
+  if (idType) return idResponse;
+  const { name } = nameObj;
+  await productsModel.updateProductById(id, name);
+  // console.log({ type, message: { id, name } });
+  return { type: 200, message: { id, name } };
+};
+
+// updateProductById(1, { nam: 'a' });
+
 module.exports = {
   getProductById,
   getAllProducts,
   insertProduct,
+  updateProductById,
 };

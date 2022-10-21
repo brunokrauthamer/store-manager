@@ -59,7 +59,7 @@ const validateNewSale = async (sale) => {
   return { type: null };
 };
 
-const validateSearchedSaleId = async (id) => {
+const validateSearchedSaleId = async (id, messageType) => {
   const ids = await salesModel.getAllSalesIds();
   // console.log(ids.includes(id));
   const validId = ids.includes(id);
@@ -67,7 +67,7 @@ const validateSearchedSaleId = async (id) => {
     return { type: null };
   }
   return {
-    type: 404, message: { message: 'Sale not found' },
+    type: 404, message: { message: `${messageType} not found` },
   };
 };
 

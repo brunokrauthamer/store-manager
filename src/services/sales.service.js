@@ -25,7 +25,7 @@ const getAllSales = async () => {
 };
 
 const getSaleById = async (id) => {
-  const response = await validations.validateSearchedSaleId(id);
+  const response = await validations.validateSearchedSaleId(id, 'Sale');
   const { type } = response;
   // console.log(response, type);
   if (type) return response;
